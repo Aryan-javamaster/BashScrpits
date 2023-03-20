@@ -11,7 +11,7 @@ docker_install () {
 	echo "updating repo's"
 	sleep 2
 	sudo chmod a+r /etc/apt/keyrings/docker.gpg
-	sudo apt update -y
+	sudo apt update
 	echo "done"
 	echo "installing required dependency"
 	sleep 2
@@ -30,7 +30,7 @@ docker_install () {
 	echo "finally installing Docker and Docker-compose"
 	sudo chmod a+r /etc/apt/keyrings/docker.gpg
 	sudo apt-get update
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 	echo "done.."
 	echo "testing"
 	sudo docker run hello-world
