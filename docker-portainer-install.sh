@@ -6,10 +6,6 @@ read result
 
 #docker install
 
-setuprepos () { echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] 
-  https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-}
 
 docker_install () {
 	echo "updating repo's"
@@ -27,10 +23,13 @@ docker_install () {
 	echo "done"
 	echo "setting up repo's"
 	sleep 2
-	setuprepos
+	echo \
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  	$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	echo "finally installing Docker and Docker-compose"
-	sudo apt update
-	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo chmod a+r /etc/apt/keyrings/docker.gpg
+	sudo apt-get update
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 	echo "done.."
 	echo "testing"
 	sudo docker run hello-world
