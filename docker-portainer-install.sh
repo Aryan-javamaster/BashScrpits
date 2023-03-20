@@ -11,11 +11,11 @@ docker_install () {
 	echo "updating repo's"
 	sleep 2
 	sudo chmod a+r /etc/apt/keyrings/docker.gpg
-	sudo apt update
+	sudo apt update -y
 	echo "done"
 	echo "installing required dependency"
 	sleep 2
-	sudo apt install ca-certificates curl gnupg lsb-release
+	sudo apt install ca-certificates curl gnupg lsb-release -y
 	echo "done"
 	echo "getting offical gpg key"
 	sleep 2
