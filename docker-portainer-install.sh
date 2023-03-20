@@ -10,6 +10,7 @@ read result
 docker_install () {
 	echo "updating repo's"
 	sleep 2
+	sudo chmod a+r /etc/apt/keyrings/docker.gpg
 	sudo apt update
 	echo "done"
 	echo "installing required dependency"
