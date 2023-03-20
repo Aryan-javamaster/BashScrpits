@@ -29,8 +29,8 @@ docker_install () {
 	sleep 2
 	setuprepos
 	echo "finally installing Docker and Docker-compose"
-	sudo apt-get update
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo apt update
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 	echo "done.."
 	echo "testing"
 	sudo docker run hello-world
