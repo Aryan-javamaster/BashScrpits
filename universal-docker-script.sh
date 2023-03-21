@@ -51,6 +51,12 @@ portainer_install () {
 	sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 }
 
+nginx_proxy_manager () {
+	wget https://raw.githubusercontent.com/Aryan-javamaster/BashScrpits/main/nginx-docker-compose.yml
+	mv nginx-docker-compose.yml docker-compose.yml
+	docker compose up -d
+}
+
 # If the user wants to install Docker
 if [[ $result == "y" ]]; then
 	echo "Downloading......docker"
@@ -65,9 +71,13 @@ if [[ $result == "y" ]]; then
 		portainer_install
 		ip=$(hostname -I)
 		echo "Portainer is now installed and running. You can access the GUI at https://$ip:9443"
-		echo "Thank you again :)"
+		echo "do you want to install ngnix-proxy-manager(GUI version)(y/n)"
+		read nginx
+		if [[ $nginx == "y" ]]; then
+			nginx_proxy_manager
+		fi
 	else 
-		exit
+		exit		
 	fi
 else 
 	exit
